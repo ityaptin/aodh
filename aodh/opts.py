@@ -16,11 +16,13 @@ import itertools
 from keystoneauth1 import loading
 
 import aodh.api
+import aodh.api.controllers.v2.alarm_rules.prometheus
 import aodh.api.controllers.v2.alarms
 import aodh.coordination
 import aodh.evaluator
 import aodh.evaluator.event
 import aodh.evaluator.gnocchi
+import aodh.evaluator.prometheus
 import aodh.event
 import aodh.keystone_client
 import aodh.notifier.rest
@@ -49,6 +51,8 @@ def list_opts():
         ('listener', itertools.chain(aodh.service.LISTENER_OPTS,
                                      aodh.event.OPTS)),
         ('notifier', aodh.service.NOTIFIER_OPTS),
+        ('prometheus', (aodh.evaluator.prometheus.OPTS +
+                        aodh.api.controllers.v2.alarm_rules.prometheus.OPTS)),
         ('service_credentials', aodh.keystone_client.OPTS),
         ('service_types', aodh.notifier.zaqar.SERVICE_OPTS),
         ('notifier', aodh.notifier.OPTS),
